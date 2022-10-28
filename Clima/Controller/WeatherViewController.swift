@@ -20,13 +20,9 @@ class WeatherViewController: UIViewController {
     var weatherManager = WeatherManager()
     
     let locationManager = CLLocationManager()
-    var currentLatitude: CLLocationDegrees?
-    var currentLongitude: CLLocationDegrees?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentLocationButton.isHidden = true
-        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
@@ -41,7 +37,7 @@ class WeatherViewController: UIViewController {
     }
     
     @IBAction func getToCurrentLocationPressed(_ sender: UIButton) {
-        weatherManager.fetchWeather(latitude: currentLatitude, longitude: currentLongitude)
+        locationManager.requestLocation()
     }
     
 }
