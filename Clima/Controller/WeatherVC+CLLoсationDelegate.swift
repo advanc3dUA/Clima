@@ -12,9 +12,10 @@ import CoreLocation
 extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            let lat = location.coordinate.latitude
-            let lon = location.coordinate.longitude
-            print(lat, lon)
+            currentLatitude = location.coordinate.latitude
+            currentLongitude = location.coordinate.longitude
+            currentLocationButton.isHidden = false
+            weatherManager.fetchWeather(latitude: currentLatitude, longitude: currentLongitude)
         }
     }
     

@@ -7,15 +7,21 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct WeatherManager {
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=da87fa9177d74dc01a4fbd98b78c121d&units=metric"
     var delegate: WeatherModelDelegate?
     
-    func fetchWeather(for city: String) {
-        let safeCity = removeSpaceSuffixIfNeeded(for: city)
-        let urlString = "\(weatherURL)&q=\(safeCity)"
-        performRequest(with: urlString)
+    func fetchWeather(for city: String? = nil, latitude: CLLocationDegrees? = nil, longitude: CLLocationDegrees? = nil) {
+        if let city = city {
+            let safeCity = removeSpaceSuffixIfNeeded(for: city)
+            let urlString = "\(weatherURL)&q=\(safeCity)"
+            performRequest(with: urlString)
+        } else if let lat = latitude, let lon = longitude {
+            let urlString = "\(weatherURL)&lat=\(lat)&lon=\(lon)"
+            performRequest(with: urlString)
+        }
     }
     
     func performRequest(with urlString: String) {
