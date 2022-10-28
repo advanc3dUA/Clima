@@ -15,11 +15,12 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
     
-    let weatherManager = WeatherManager()
+    var weatherManager = WeatherManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchTextField.delegate = self
+        weatherManager.delegate = self
     }
 
     @IBAction func searchPressed(_ sender: UIButton) {
